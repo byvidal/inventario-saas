@@ -25,6 +25,8 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('appearance.edit');
     Volt::route('movements/purchase', 'movements.purchase')->name('movements.purchase');
 
+    Volt::route('movements/sale', 'movements.sale')->name('movements.sale');
+
     // 👇 RUTAS DE SUCURSALES
     Volt::route('branches', 'branches.index')->name('branches.index');
     Volt::route('branches/create', 'branches.create')->name('branches.create');
