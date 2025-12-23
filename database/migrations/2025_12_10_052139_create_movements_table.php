@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -17,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); # Quien realiza el movimiento
             $table->foreignId('branch_id')->constrained()->onDelete('cascade'); # Sucursal donde se realiza el movimiento
             $table->foreignId('product_id')->constrained()->onDelete('cascade'); # Producto afectado
+            $table->foreignId('supplier_id')->nullable()->constrained()->onDelete('set null');
 
             # Detalles del movimiento
             $table->enum('type', ['purchase', 'sale', 'adjustment_in', 'adjustment_out', 'transfer']);

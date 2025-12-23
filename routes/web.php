@@ -8,7 +8,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::view('dashboard', 'dashboard')
+// 👇 CAMBIO IMPORTANTE: Usamos Volt::route en lugar de Route::view
+Volt::route('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
@@ -22,6 +23,16 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/profile', 'settings.profile')->name('profile.edit');
     Volt::route('settings/password', 'settings.password')->name('user-password.edit');
     Volt::route('settings/appearance', 'settings.appearance')->name('appearance.edit');
+    Volt::route('movements/purchase', 'movements.purchase')->name('movements.purchase');
+
+    // 👇 RUTAS DE SUCURSALES
+    Volt::route('branches', 'branches.index')->name('branches.index');
+    Volt::route('branches/create', 'branches.create')->name('branches.create');
+    Volt::route('branches/{branch}/edit', 'branches.edit')->name('branches.edit');
+
+    Volt::route('suppliers', 'suppliers.index')->name('suppliers.index');
+    Volt::route('suppliers/create', 'suppliers.create')->name('suppliers.create');
+    Volt::route('suppliers/{supplier}/edit', 'suppliers.edit')->name('suppliers.edit');
 
     Volt::route('settings/two-factor', 'settings.two-factor')
         ->middleware(

@@ -17,9 +17,12 @@ class Product extends Model
         'sku',
         'description',
         'price',
+        'cost',
+        'min_stock',
         'weight',      # <--- El nuevo campo que agregamos
         'category_id',
         'unit_id',
+        #'image_path',
     ];
 
     # Relaciones: Permiten acceder a la categoría así: $product->category->name
