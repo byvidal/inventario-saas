@@ -17,6 +17,7 @@ class Movement extends Model
         'quantity',
         'cost_at_movement',
         'price_at_movement',
+        'notes',
     ];
 
     // Relación con el Producto

@@ -32,6 +32,16 @@
                     :current="request()->routeIs('movements.sale')" wire:navigate>
                     {{ __('Registrar Venta') }}
                 </flux:navlist.item>
+
+                <flux:navlist.item icon="arrows-right-left" :href="route('movements.transfer')"
+                    :current="request()->routeIs('movements.transfer')" wire:navigate>
+                    {{ __('Traspaso') }}
+                </flux:navlist.item>
+
+                <flux:navlist.item icon="trash" :href="route('movements.adjustment')"
+                    :current="request()->routeIs('movements.adjustment')" wire:navigate>
+                    {{ __('Registrar Merma') }}
+                </flux:navlist.item>
             </flux:navlist.group>
 
             <flux:navlist.group :heading="__('Administración')" class="grid mt-4">

@@ -27,6 +27,11 @@ Route::middleware(['auth'])->group(function () {
 
     Volt::route('movements/sale', 'movements.sale')->name('movements.sale');
 
+    Volt::route('movements/transfer', 'movements.transfer')->name('movements.transfer');
+
+    Volt::route('movements/adjustment', 'movements.adjustment')->name('movements.adjustment');
+    Volt::route('products/{product}/kardex', 'products.kardex')->name('products.kardex');
+
     // 👇 RUTAS DE SUCURSALES
     Volt::route('branches', 'branches.index')->name('branches.index');
     Volt::route('branches/create', 'branches.create')->name('branches.create');

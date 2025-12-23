@@ -35,4 +35,10 @@ class Product extends Model
     {
         return $this->belongsTo(Unit::class);
     }
+
+    public function productBranches(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(ProductBranch::class);
+    }
+
 }
