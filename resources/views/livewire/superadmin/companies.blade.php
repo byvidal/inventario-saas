@@ -202,7 +202,6 @@ new class extends Component {
                     
                     <div class="space-y-4">
                         <div>
-                Log::info('Administrador eliminado por superadmin', ['admin_id' => $adminId, 'by' => auth()->id() ?? null]);
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nombre de la Empresa</label>
                             <input type="text" wire:model="company_name" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:text-white">
                             @error('company_name') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
@@ -251,27 +250,27 @@ new class extends Component {
                                         </p>
                                     </div>
                                     
-                                    <div class="flex items-center space-x-3">
-                                        <button wire:click="edit({{ $company->id }})" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium text-sm transition-colors">
-                                            Editar Empresa
+                                    <div class="flex items-center gap-2 flex-wrap justify-end">
+                                        <button wire:click="edit({{ $company->id }})" class="px-3 py-1.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-900/50 rounded-lg text-xs font-medium transition-colors border border-blue-200 dark:border-blue-800">
+                                            ✏ Empresa
                                         </button>
 
                                         @php $admin = $company->users->first(); @endphp
                                         @if($admin)
-                                            <button wire:click="editAdmin({{ $admin->id }})" class="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 font-medium text-sm transition-colors">
-                                                Editar Admin
+                                            <button wire:click="editAdmin({{ $admin->id }})" class="px-3 py-1.5 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-900/50 rounded-lg text-xs font-medium transition-colors border border-indigo-200 dark:border-indigo-800">
+                                                👤 Admin
                                             </button>
 
-                                            <button wire:click="confirmDeleteAdmin({{ $admin->id }})" class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 font-medium text-sm transition-colors">
-                                                Eliminar Admin
+                                            <button wire:click="confirmDeleteAdmin({{ $admin->id }})" class="px-3 py-1.5 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 hover:bg-red-200 dark:hover:bg-red-900/50 rounded-lg text-xs font-medium transition-colors border border-red-200 dark:border-red-800">
+                                                🗑 Admin
                                             </button>
                                         @endif
 
                                         <button 
                                             wire:click="confirmDeleteCompany({{ $company->id }})" 
-                                            class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 font-medium text-sm transition-colors"
+                                            class="px-3 py-1.5 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 hover:bg-red-200 dark:hover:bg-red-900/50 rounded-lg text-xs font-medium transition-colors border border-red-200 dark:border-red-800"
                                         >
-                                            Eliminar Empresa
+                                            🗑 Empresa
                                         </button>
                                     </div>
                                 </div>
