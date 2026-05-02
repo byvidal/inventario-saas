@@ -16,7 +16,7 @@ new
     public function with(): array
     {
         return [
-            'products' => Product::where('company_id', Auth::user()->company_id)
+            'products' => Product::query()
                 ->where(function ($query) {
                     $query->where('name', 'ilike', '%' . $this->search . '%')
                         ->orWhere('sku', 'ilike', '%' . $this->search . '%');

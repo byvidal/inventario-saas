@@ -23,6 +23,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'company_id',
+        'role',
     ];
 
     /**
@@ -51,6 +53,22 @@ class User extends Authenticatable
     }
 
     /**
+     * Relation: User belongs to Company
+     */
+    public function company(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    /**
+     * Relation: User has many Movements (for audit trail)
+     */
+    public function movements(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Movement::class);
+    }
+
+    /**
      * Get the user's initials
      */
     public function initials(): string
@@ -60,5 +78,30 @@ class User extends Authenticatable
             ->take(2)
             ->map(fn ($word) => Str::substr($word, 0, 1))
             ->implode('');
+    }
+
+    /**
+     * Role helpers
+     */
+    public function isOwner(): bool
+    {
+        return $this->role === 'owner';
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin' || $this->isOwner();
+    }
+
+    /**
+     * Determine if the user can manage a given company (owner or admin of that company)
+     */
+    public function canManageCompany(?int $companyId): bool
+    {
+        if ($this->isOwner()) {
+            return true; // super-admin (SaaS owner) can manage any company
+        }
+
+        return $this->isAdmin() && $this->company_id && $this->company_id === $companyId;
     }
 }

@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Traits\BelongsToCompany;
 
 class Product extends Model
 {
+    use BelongsToCompany;
     /**
      * Los atributos que son asignables en masa.
      * Esto soluciona el error "Add [field] to fillable property".

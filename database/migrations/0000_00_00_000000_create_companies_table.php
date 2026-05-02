@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('tax_id')->nullable(); # RFC, NIT, etc.
             $table->string('logo_path')->nullable();
-            $table->string('is_active')->default('True'); #Para suspender si no pagan
+            $table->boolean('is_active')->default(true); #Para suspender si no pagan
             $table->timestamps();
         });
     }

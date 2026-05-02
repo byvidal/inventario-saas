@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $company = Company::create([
             'name' => 'Mi Primera Empresa SaaS',
             'tax_id' => '123456789',
+            'is_active' => true,
         ]);
 
         // 2. Crear la Sucursal Principal
@@ -30,24 +31,19 @@ class DatabaseSeeder extends Seeder
 
         // 3. Crear el Usuario Administrador (Dueño) vinculado a la empresa
         User::create([
-            'company_id' => $company->id, // ¡Importante!
+            'company_id' => $company->id,
             'name' => 'Admin Inventario',
             'email' => 'admin@admin.com',
-            'password' => Hash::make('password'), // Contraseña: password
+            'password' => Hash::make('password'),
             'role' => 'owner',
         ]);
 
-        // 4. Datos de configuración iniciales para esa empresa
-        Tax::create([
-            'company_id' => $company->id,
-            'name' => 'IVA General (16%)',
-            'rate' => 16.00,
-            'is_default' => true
+        // 4. Run child seeders for better organization
+        $this->call([
+            CategorySeeder::class,
+            UnitSeeder::class,
+            TaxSeeder::class,
+            BrandSeeder::class,
         ]);
-
-        Unit::create(['company_id' => $company->id, 'name' => 'Pieza', 'abbreviation' => 'pza']);
-        Unit::create(['company_id' => $company->id, 'name' => 'Kilogramo', 'abbreviation' => 'kg']);
-
-        Category::create(['company_id' => $company->id, 'name' => 'General']);
     }
 }

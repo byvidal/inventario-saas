@@ -2,22 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
-use Illuminate\Database\Eloquent\Relations\BelongsTo; // 👈 Importante
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Traits\BelongsToCompany;
 
-class ProductBranch extends Pivot
+class ProductBranch extends Model
 {
+    use BelongsToCompany;
+
     protected $table = 'product_branch';
 
-    public $timestamps = false;
-
     protected $fillable = [
+        'company_id',
         'product_id',
         'branch_id',
         'quantity',
     ];
 
-    // 👇 ESTO ERA LO QUE FALTABA
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);

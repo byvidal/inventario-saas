@@ -16,8 +16,8 @@ new
     public $sku = '';
     public $description = '';
     public $price = '';
-    public $cost = '';          // 👈 NUEVO
-    public $min_stock = 5;      // 👈 NUEVO (Por defecto 5 según tu migración)
+    public $cost = '';
+    public $min_stock = 5;
     public $weight = '';
     public $category_id = '';
     public $unit_id = '';
@@ -29,8 +29,8 @@ new
             'name' => 'required|min:3',
             'sku' => 'required|unique:products,sku,NULL,id,company_id,' . Auth::user()->company_id,
             'price' => 'required|numeric|min:0',
-            'cost' => 'required|numeric|min:0',      // 👈 Validación Costo
-            'min_stock' => 'required|integer|min:0', // 👈 Validación Stock Mínimo
+            'cost' => 'required|numeric|min:0',
+            'min_stock' => 'required|integer|min:0',
             'weight' => 'nullable|numeric|min:0',
             'category_id' => 'required|exists:categories,id',
             'unit_id' => 'required|exists:units,id',
@@ -43,8 +43,8 @@ new
             'sku' => $this->sku,
             'description' => $this->description,
             'price' => $this->price,
-            'cost' => $this->cost,          // 👈 Guardamos
-            'min_stock' => $this->min_stock,// 👈 Guardamos
+            'cost' => $this->cost,
+            'min_stock' => $this->min_stock,
             'weight' => $this->weight === '' ? null : $this->weight,
             'category_id' => $this->category_id,
             'unit_id' => $this->unit_id,

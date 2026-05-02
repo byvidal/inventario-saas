@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('company_id')->constrained()->onDelete('cascade');
             $table->string('name');
+            $table->unique(['company_id', 'name']);
             $table->timestamps();
         });
     }
