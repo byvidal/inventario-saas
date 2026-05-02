@@ -14,10 +14,18 @@ class CompanyScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        // Solo aplicamos el filtro si hay un usuario logueado y tiene company_id asignado
-        if (Auth::check() && Auth::user()->company_id) {
-            // Usamos $model->getTable() para evitar errores de ambigüedad en Joins
-            $builder->where($model->getTable() . '.company_id', Auth::user()->company_id);
+        if (Auth::check()) {
+            // 👇 MAGIA: Si eres el dueño del SaaS, salimos de la función sin aplicar filtros.
+            // Esto te permite ver absolutamente todo en la base de datos.
+            if (Auth::user()->role === 'super_admin') {
+                return;
+            }
+
+            // Para los clientes (company_admin o user), aplicamos el filtro estricto de su empresa.
+            if (Auth::user()->company_id) {
+                // Usamos $model->getTable() para evitar errores de ambigüedad en Joins
+                $builder->where($model->getTable() . '.company_id', Auth::user()->company_id);
+            }
         }
     }
 }

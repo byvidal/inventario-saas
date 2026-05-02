@@ -63,16 +63,19 @@
 
             </flux:navlist.group>
 
+            {{-- 👇 MENÚ EXCLUSIVO PARA EL DUEÑO DEL SAAS (SUPER ADMIN) --}}
+            @if(auth()->user() && auth()->user()->role === 'super_admin')
+                <flux:navlist.group :heading="__('Poder Absoluto (Dueño)')" class="grid mt-4">
+                    <flux:navlist.item icon="shield-check" :href="route('superadmin.companies')"
+                        :current="request()->routeIs('superadmin.companies')" wire:navigate>
+                        {{ __('Gestión de Empresas') }}
+                    </flux:navlist.item>
+                </flux:navlist.group>
+            @endif
+
         </flux:navlist>
 
         <flux:spacer />
-
-        <flux:navlist variant="outline">
-            <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit"
-                target="_blank">
-                {{ __('Repository') }}
-            </flux:navlist.item>
-        </flux:navlist>
 
         <flux:dropdown class="hidden lg:block" position="bottom" align="start">
             <flux:profile :name="auth()->user()->name" :initials="auth()->user()->initials()"
